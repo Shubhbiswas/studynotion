@@ -1,3 +1,6 @@
+//course progress yh track krega ki ..is user ne yh course ki yh sare videos complete kr rkhi h
+//course assign k bhad course progress humessha zero se assign hoga.
+
 const mongoose = require("mongoose")
 const Section = require("../models/Section")
 const SubSection = require("../models/SubSection")
@@ -17,7 +20,7 @@ exports.updateCourseProgress = async (req, res) => {
     }
 
     // Find the course progress document for the user and course
-    //Ye check karta hai ki user ka is course ke liye progress record bana hua hai ya nahi.
+    //Ye check karta hai ki user ka is course ke liye progress record phele se bana hua hai ya nahi.
     let courseProgress = await CourseProgress.findOne({
       courseID: courseId,
       userId: userId,
@@ -33,11 +36,14 @@ exports.updateCourseProgress = async (req, res) => {
     } 
     //agar record mila toh check karta hai ki kahi ye subsection already complete toh nahi
     else {
+      //check for re-completing video/subsection
       // If course progress exists, check if the subsection is already completed
       if (courseProgress.completedVideos.includes(subsectionId)) {
-        return res.status(400).json({ error: "Subsection already completed" })
+        return res.status(400)
+        .json({ 
+          error: "Subsection already completed" })
       }
-      
+      //agar phele se completed nai h toh push krde completed meh
       // If found completed then , Push the subsection into the completedVideos array
       courseProgress.completedVideos.push(subsectionId)
     }

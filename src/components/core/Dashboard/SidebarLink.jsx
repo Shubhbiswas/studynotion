@@ -5,13 +5,13 @@ import React from 'react'
 import * as Icons from "react-icons/vsc" ;
 import { useDispatch } from 'react-redux';
 import { matchPath, NavLink, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { resetCourseState } from "../../../slices/courseSlice"
 
 const SidebarLink = ({element , iconName}) => {
     const Icon = Icons[iconName] ;
     
     //location hook isliye bcoz thaki hume pata chale ki konsa link click ho rha h jisse hum uska bg colour yellow kr skte ya uska colour nrml he rahe 
-    const Location = useLocation();
+    const location = useLocation();
 
     const dispatch = useDispatch() ;
 

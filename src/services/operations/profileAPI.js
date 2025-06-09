@@ -2,7 +2,7 @@ import { toast } from "react-hot-toast"
 
 import { setLoading, setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiconnector"
-import { profileEndpoints } from "../apis"
+import { profileEndpoints } from "../api"
 import { logout } from "./authAPI"
 
 const { GET_USER_DETAILS_API, GET_USER_ENROLLED_COURSES_API, GET_INSTRUCTOR_DATA_API } = profileEndpoints
@@ -69,6 +69,7 @@ export async function getInstructorData(token) {
   const toastId = toast.loading("Loading...");
   let result = [];
   try{
+    //api call 
     const response = await apiConnector("GET", GET_INSTRUCTOR_DATA_API, null, 
     {
       Authorization: `Bearer ${token}`,
